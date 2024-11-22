@@ -79,8 +79,69 @@ public class Servlet3 extends HttpServlet {
 }
 ```
  
+ # 第2章：Servlet的生命周期与配置
+## Servlet生命周期
+Servlet的生命周期主要包括以下几个阶段：
+### 1. 初始化（init()）
+- **描述**：Servlet容器在加载Servlet类之后，只会调用一次`init()`方法。
+- **用途**：用于完成初始化操作，如加载配置文件、建立数据库连接等。
+### 2. 服务（service()）
+- **描述**：每次客户端请求到达时，Servlet容器都会调用`service()`方法。
+- **用途**：处理客户端请求，如处理HTTP GET、POST请求等。
+### 3. 销毁（destroy()）
+- **描述**：在删除Servlet实例之前，Servlet容器会调用`destroy()`方法。
+- **用途**：用于释放资源，如关闭数据库连接、释放内存等。
+## 获取URL参数值
+在Servlet中，可以通过`HttpServletRequest`对象获取URL中的参数值：
+```java
+String parameterValue = request.getParameter("parameterName");
+```
+## 重定向方法
+重定向客户端请求到另一个URL或Servlet，使用`HttpServletResponse`对象的`sendRedirect()`方法：
+```java
+response.sendRedirect("newURL");
+```
+## web.xml参数的配置和使用
+### 1. 配置Servlet初始化参数
+在`web.xml`中为Servlet配置初始化参数：
+```xml
+<servlet>
+    <servlet-name>ServletTest2</servlet-name>
+    <servlet-class>com.niit.ServletTest2</servlet-class>
+    <!-- 定义当前Servlet的初始化参数 -->
+    <init-param>
+        <param-name>name</param-name>
+        <param-value>张三 zhangsan</param-value>
+    </init-param>
+</servlet>
+```
+在Servlet中获取初始化参数：
+```java
+String name = getServletConfig().getInitParameter("name");
+```
+### 2. 配置上下文参数
+在`web.xml`中为整个Web应用配置上下文参数：
+```xml
+<context-param>
+    <param-name>title</param-name>
+    <param-value>支付宝V2.0</param-value>
+</context-param>
+```
+在Servlet中获取上下文参数：
+```java
+String title = getServletContext().getInitParameter("title");
+```
+### 3. Servlet映射
+将Servlet映射到URL：
+```xml
+<servlet-mapping>
+    <servlet-name>ServletTest2</servlet-name>
+    <url-pattern>/ServletTest2</url-pattern>
+</servlet-mapping>
+```
+通过上述Markdown排版的复习资料，可以清晰地了解Servlet的生命周期、参数获取、重定向以及`web.xml`的配置方法。在复习时，重点关注Servlet生命周期的三个阶段以及如何配置和使用初始化参数。
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjEwNjk0Mjk2XX0=
+eyJoaXN0b3J5IjpbLTg5NTc4MjkyMywyMTA2OTQyOTZdfQ==
 -->
