@@ -78,9 +78,10 @@ public class Servlet3 extends HttpServlet {
     }
 }
 ```
-通过上述Markdown排版的复习资料，可以更清晰地理解Servlet的创建与配置过程。在复习时，可以重点关注两个注册Servlet的方法，并理解其背后的原理。
+ 
+
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTc3NjE1MDc0LC0yMDg4NzQ2NjEyLDQzOT
+eyJoaXN0b3J5IjpbMjEwNjk0Mjk2LC0yMDg4NzQ2NjEyLDQzOT
 c1NjU1MV19
 -->
