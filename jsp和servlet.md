@@ -143,8 +143,74 @@ String title = getServletContext().getInitParameter("title");
 
 
 
+# 第3章：会话管理技术
+会话管理是Web应用中的一项重要技术，它允许服务器跟踪用户的状态和信息。以下是几种常见的会话管理技术：
+## 1. 隐藏表单域
+隐藏表单域是一种简单的会话管理技术，它通过在HTML表单中插入一个不可见的表单字段来传递信息。
+```html
+<input type="hidden" name="hiddenField" value="value">
+```
+## 2. URL重写
+URL重写是在URL中加入额外的参数来维持会话状态的方法。这些参数通常包含在查询字符串中。
+```java
+response.encodeRedirectURL("nextPage.jsp?param=value");
+```
+## 3. Cookie
+Cookie是一种存储在客户端计算机上的小型文本文件，用于记录用户的信息。
+### Cookie操作
+- **添加Cookie**：
+```java
+Cookie cookie = new Cookie("name", "value");
+response.addCookie(cookie);
+```
+- **获取Cookie**：
+```java
+Cookie[] cookies = request.getCookies();
+if (cookies != null) {
+    for (Cookie cookie : cookies) {
+        if (cookie.getName().equals("name")) {
+            // 处理cookie
+        }
+    }
+}
+```
+- **修改Cookie**：
+```java
+for (Cookie cookie : cookies) {
+    if (cookie.getName().equals("name")) {
+        cookie.setValue("newValue");
+        response.addCookie(cookie);
+        break;
+    }
+}
+```
+- **删除Cookie**：
+通常通过设置Cookie的过期时间为过去的时间来删除Cookie。
+```java
+cookie.setMaxAge(0);
+response.addCookie(cookie);
+```
+## 4. Session（会话）
+Session是一种服务器端的会话管理技术，它允许服务器在多个请求之间存储和检索用户信息。
+### Session操作
+- **设置Session属性**：
+```java
+session.setAttribute("key", "value");
+```
+- **获取Session属性**：
+```java
+Object value = session.getAttribute("key");
+```
+- **删除Session属性**：
+```java
+session.removeAttribute("key");
+```
+- **销毁Session**：
+```java
+session.invalidate();
+```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0MTA3NDY3OTksLTg5NTc4MjkyMywyMT
-A2OTQyOTZdfQ==
+eyJoaXN0b3J5IjpbLTE3MjY4NTI1MjcsLTE0MTA3NDY3OTksMj
+EwNjk0Mjk2XX0=
 -->
