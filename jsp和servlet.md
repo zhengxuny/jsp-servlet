@@ -131,8 +131,51 @@ public class Servlet3 extends HttpServlet {
 </servlet-mapping>
 ```
 
+### 第3章：会话管理技术详解
+#### 一、会话管理概述
+会话管理是一种在多个请求之间持续跟踪用户状态的技术。在Web应用中，会话管理技术包括以下几种：
+1. 隐藏表单域
+   - 描述：在表单中创建隐藏的输入字段，用于存储和传递数据。
+   - 示例：`<input type="hidden" name="hiddenField" value="value">`
+2. URL重写
+   - 描述：在URL中附加参数，以维持会话状态。
+   - 示例：`http://example.com/page.jsp?param=value`
+3. Cookie
+   - 描述：小型的文本文件，服务器发送到客户端浏览器并保存在本地。
+   - 操作：使用`HttpServletResponse`对象的`addCookie()`方法添加Cookie。
+4. Session
+   - 描述：在服务器端存储用户会话数据的对象。
+   - 操作：通过`setAttribute()`方法设置数据，`getAttribute()`方法获取数据。
+二、Cookie操作详解
+P3.8节中，我们将详细探讨如何操作Cookie：
+1. 创建Cookie
+   - 语法：`Cookie cookieName = new Cookie("name", "value");`
+   - 示例：`Cookie userCookie = new Cookie("username", "johnDoe");`
+2. 设置Cookie属性
+   - 过期时间：`cookie.setMaxAge(int expiry);` // 设置Cookie的有效期，单位为秒。
+   - 路径：`cookie.setPath(String uri);` // 设置Cookie的有效路径。
+   - 域：`cookie.setDomain(String domain);` // 设置Cookie的有效域。
+   - 安全性：`cookie.setSecure(boolean flag);` // 指定是否只能通过HTTPS发送Cookie。
+3. 发送Cookie到客户端
+   - 语法：`response.addCookie(Cookie cookie);`
+   - 示例：`response.addCookie(userCookie);`
+4. 从客户端读取Cookie
+   - 语法：`Cookie[] request.getCookies();`
+   - 示例：
+     ```java
+     Cookie[] cookies = request.getCookies();
+     if (cookies != null) {
+         for (Cookie cookie : cookies) {
+             if ("username".equals(cookie.getName())) {
+                 String username = cookie.getValue();
+                 // 使用username值
+             }
+         }
+     }
+     ```
+
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDM5NzU2NTUxXX0=
+eyJoaXN0b3J5IjpbLTE2MTAxNzI1NzYsNDM5NzU2NTUxXX0=
 -->
