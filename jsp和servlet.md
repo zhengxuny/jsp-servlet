@@ -420,9 +420,48 @@ JDBC（Java Database Connectivity）是Java语言中用于数据库操作的API�
    ```
 
 
+# 第8章：EL表达式与JSTL
+## EL表达式（Expression Language）
+EL表达式提供了一种在JSP页面中简化代码的方式，它可以访问页面的上下文以及JavaBean组件的属性。
+### EL表达式的特点
+- **变量未声明不会引发异常**：如果EL表达式中的变量未声明，它不会抛出异常，而是显示为空。
+  ```jsp
+  <p>用户名：${username}</p>
+  ```
+- **算术运算**：EL表达式在计算算术运算时，会将`null`视为`0`。
+  ```jsp
+  <p>${2+i}</p>
+  ```
+- **逻辑表达式**：在计算逻辑表达式时，EL表达式会将`null`视为`false`。
+  ```jsp
+  <p>${3>j}</p>
+  ```
+## JSTL标记（JavaServer Pages Standard Tag Library）
+JSTL提供了一系列自定义标记，用于简化JSP页面的开发。
+### JSTL标记的使用
+- **条件判断（if）**：用于执行基于条件的操作。
+  ```jsp
+  <c:if test="${condition}">
+    <!-- 条件为真时执行的代码 -->
+  </c:if>
+  ```
+- **循环迭代（forEach）**：用于遍历数组、集合或Map。
+  - **遍历Map的写法**：
+    ```jsp
+    <c:forEach items="${map}" var="item">
+      <div>键=${item.key}</div>
+      <div>值=${item.value}</div>
+    </c:forEach>
+    ```
+### 格式化日期（<fmt:formatDate>）
+`<fmt:formatDate>`标记用于格式化日期和时间。
+- **pattern属性**：指定日期/时间的格式。
+  ```jsp
+  <fmt:formatDate value="${date}" pattern="yyyy-MM-dd"/>
+  ```
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODM4MDk0MTc1LC0xMDU2NzEyNzI2LC0xNz
-I2ODUyNTI3LC0xNDEwNzQ2Nzk5LDIxMDY5NDI5Nl19
+eyJoaXN0b3J5IjpbLTE4Mjc2NjQ2ODEsLTEwNTY3MTI3MjYsLT
+E3MjY4NTI1MjcsLTE0MTA3NDY3OTksMjEwNjk0Mjk2XX0=
 -->
