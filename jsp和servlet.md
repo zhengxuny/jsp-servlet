@@ -209,8 +209,131 @@ session.removeAttribute("key");
 ```java
 session.invalidate();
 ```
+# 第4章：请求转发与过滤器
+## 请求转发（Forward）
+请求转发是服务器端的一种操作，它允许Servlet将请求转发到另一个资源（如另一个Servlet、JSP页面或HTML文件）进行处理。
+### 请求分发器（RequestDispatcher）
+请求分发器是Servlet API的一部分，它提供了以下两个主要方法：
+1. **include()**：将其他Servlet的内容包含到当前Servlet的响应中。
+```java
+RequestDispatcher dispatcher = request.getRequestDispatcher("otherServlet");
+dispatcher.include(request, response);
+```
+2. **forward()**：将当前请求转发给其他Servlet。
+```java
+RequestDispatcher dispatcher = request.getRequestDispatcher("otherServlet");
+dispatcher.forward(request, response);
+```
+## 过滤器（Filter）
+过滤器是Servlet技术中用于拦截请求和响应的对象，可以在请求到达目标资源之前或响应返回客户端之前进行预处理。
+### 实现过滤器
+1. **实现Filter接口**：
+```java
+public class FilterA implements Filter {
+    // ...
+}
+```
+2. **重写三个方法**：
+- **init()**：过滤器初始化时调用。
+- **doFilter()**：执行过滤逻辑，通过`chain.doFilter(request, response)`来控制请求是否被放行。
+- **destroy()**：过滤器被销毁时调用。
+```java
+@Override
+public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+    throws IOException, ServletException {
+    // 过滤逻辑
+    chain.doFilter(request, response); // 继续执行后续过滤器或目标资源
+}
+```
+3. **配置过滤器**：
+在`web.xml`中注册过滤器并指定其拦截的URL。
+```xml
+<!-- 注册过滤器 -->
+<filter>
+    <filter-name>FilterA</filter-name>
+    <filter-class>com.niit.FilterA</filter-class>
+</filter>
+<!-- 配置过滤器所拦截的URL -->
+<filter-mapping>
+    <filter-name>FilterA</filter-name>
+    <url-pattern>/ServletFilterTest</url-pattern>
+</filter-mapping>
+```
+
+# 第5章：JSP基础
+## JSP指令
+JSP指令用于提供全局性的指令信息，它们影响JSP页面的整体结构和行为。常见的JSP指令有：
+1. **page指令**：用于定义页面级别的属性，如内容类型、缓存需求、错误页面等。
+```jsp
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+```
+2. **include指令**：用于静态包含其他文件的内容。
+```jsp
+<%@ include file="header.jsp" %>
+```
+3. **taglib指令**：用于引入自定义标记库。
+```jsp
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+```
+## JSP脚本元素
+JSP脚本元素允许在JSP页面中嵌入Java代码。
+1. **声明**：用于声明变量和方法。
+```jsp
+<%! int count = 0; %>
+```
+2. **表达式**：用于直接输出表达式的值。
+```jsp
+<%= count %>
+```
+3. **Scriptlet**：用于编写Java代码块。
+```jsp
+<%
+for (int i = 0; i < 10; i++) {
+    out.println(i);
+}
+%>
+```
+- JSP注释：用于在JSP页面中添加不会被发送到客户端的注释。
+```jsp
+<%-- JSP注释 --%>
+```
+## JSP内置对象
+JSP提供了九大内置对象，这些对象无需显式声明即可在JSP页面中使用。
+- application：ServletContext对象的实例，用于表示Web应用程序的上下文。
+- config：ServletConfig对象的实例，用于获取配置信息。
+- exception：Throwable对象的实例，用于处理页面中的异常。
+- out：JspWriter对象的实例，用于向客户端发送输出。
+- page：当前JSP页面的Servlet实例。
+- session：HttpSession对象的实例，用于跟踪用户会话。
+- response：HttpServletResponse对象的实例，用于响应客户端请求。
+- request：HttpServletRequest对象的实例，用于处理客户端请求。
+- pageContext：PageContext对象的实例，用于提供对JSP页面所有对象和命名空间的访问。
+## JSP动作
+JSP动作元素用于在JSP页面中执行动作，它们在运行时执行。
+- **<jsp:include>**：动态包含其他文件的内容。
+```jsp
+<jsp:include page="header.jsp" />
+```
+- **<jsp:forward>**：将请求转发到另一个资源。
+```jsp
+<jsp:forward page="target.jsp" />
+```
+- **<jsp:useBean>**：创建或查找Bean实例。
+```jsp
+<jsp:useBean id="bean" class="com.niit.BeanClass" />
+```
+- **<jsp:setProperty>**：设置Bean属性。
+```jsp
+<jsp:setProperty name="bean" property="propertyName" value="value" />
+```
+- **<jsp:getProperty>**：获取Bean属性。
+```jsp
+<jsp:getProperty name="bean" property="propertyName" />
+```
+
+
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3MjY4NTI1MjcsLTE0MTA3NDY3OTksMj
-EwNjk0Mjk2XX0=
+eyJoaXN0b3J5IjpbLTEwNTY3MTI3MjYsLTE3MjY4NTI1MjcsLT
+E0MTA3NDY3OTksMjEwNjk0Mjk2XX0=
 -->
