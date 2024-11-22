@@ -330,10 +330,99 @@ JSP动作元素用于在JSP页面中执行动作，它们在运行时执行。
 ```jsp
 <jsp:getProperty name="bean" property="propertyName" />
 ```
+# 第7章：MVC设计模式与JDBC操作
+## MVC设计模式
+MVC（Model-View-Controller）是一种软件设计模式，用于将应用程序分解为三个相互协作的组件。
+- **Model（模型）**：处理业务逻辑和数据，通常代表数据库记录。
+- **View（视图）**：呈现数据给用户，通常是指HTML页面或其他用户界面。
+- **Controller（控制器）**：处理用户输入和交互，通常负责从视图读取数据，控制用户输入，并向模型发送数据。
+## JDBC操作步骤
+JDBC（Java Database Connectivity）是Java语言中用于数据库操作的API。以下是使用JDBC进行数据库操作的步骤：
+### 方式1：使用Statement对象
+1. **加载驱动**
+   ```java
+   Class.forName("com.mysql.cj.jdbc.Driver");
+   ```
+2. **建立数据库连接**
+   ```java
+   Connection conn = DriverManager.getConnection(url, user, password);
+   ```
+3. **创建Statement对象**
+   ```java
+   Statement statement = conn.createStatement();
+   ```
+4. **执行SQL语句**
+   - **查询操作**
+     ```java
+     String sql = "SELECT * FROM xxx";
+     ResultSet rs = statement.executeQuery(sql);
+     ```
+   - **更新操作**
+     ```java
+     int i = statement.executeUpdate(sql);
+     ```
+5. **操作结果集**（仅针对查询操作）
+   ```java
+   while (rs.next()) {
+       int id = rs.getInt("id");
+       String code = rs.getString("code");
+       String name = rs.getString("name");
+       String author = rs.getString("author");
+       BigDecimal unitPrice = rs.getBigDecimal("unit_price");
+   }
+   ```
+6. **释放资源**
+   ```java
+   rs.close(); // 释放查询结果集（针对查询操作）
+   statement.close(); // 释放Statement对象
+   conn.close(); // 释放连接对象
+   ```
+### 方式2：使用PreparedStatement对象
+1. **加载驱动**
+   ```java
+   Class.forName("com.mysql.cj.jdbc.Driver");
+   ```
+2. **建立数据库连接**
+   ```java
+   Connection conn = DriverManager.getConnection(url, user, password);
+   ```
+3. **创建PreparedStatement对象**
+   ```java
+   String sql = "SELECT * FROM xxx WHERE a=? AND b=?";
+   PreparedStatement ps = conn.prepareStatement(sql);
+   ps.setString(1, code); // 设置SQL语句中的第1个问号的值
+   ps.setString(2, name); // 设置SQL语句中的第2个问号的值
+   ```
+4. **执行SQL语句**
+   - **查询操作**
+     ```java
+     ResultSet rs = ps.executeQuery();
+     ```
+   - **更新操作**
+     ```java
+     int i = ps.executeUpdate();
+     ```
+5. **操作结果集**（仅针对查询操作）
+   ```java
+   while (rs.next()) {
+       int id = rs.getInt("id");
+       String code = rs.getString("code");
+       String name = rs.getString("name");
+       String author = rs.getString("author");
+       BigDecimal unitPrice = rs.getBigDecimal("unit_price");
+   }
+   ```
+6. **释放资源**
+   ```java
+   rs.close(); // 释放查询结果集（针对查询操作）
+   ps.close(); // 释放PreparedStatement对象
+   conn.close(); // 释放连接对象
+   ```
+
 
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwNTY3MTI3MjYsLTE3MjY4NTI1MjcsLT
-E0MTA3NDY3OTksMjEwNjk0Mjk2XX0=
+eyJoaXN0b3J5IjpbODM4MDk0MTc1LC0xMDU2NzEyNzI2LC0xNz
+I2ODUyNTI3LC0xNDEwNzQ2Nzk5LDIxMDY5NDI5Nl19
 -->
