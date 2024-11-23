@@ -78,15 +78,15 @@ public class Servlet3 extends HttpServlet {
     }
 }
 ```
- # Java的封装、继承、多态
+ ## 补充知识：Java的封装、继承、多态
 Java作为一门面向对象的编程语言，其核心特性包括封装、继承和多态。以下将分别介绍这三个特性。
-## 封装
+## #封装
 封装是面向对象编程的基本原则之一，它意味着将对象的实现细节隐藏起来，只对外暴露有限的接口。
-### 优点
+#### 优点
 - **安全性**：防止外部直接访问对象内部数据，提高数据安全性。
 - **简化性**：用户无需关心对象内部复杂实现，只需通过暴露的接口进行操作。
 - **可维护性**：当内部实现需要修改时，只要接口保持不变，外部调用者无需修改代码。
-### 实现
+#### 实现
 在Java中，可以使用以下方式实现封装：
 - **访问修饰符**：public、protected、private和默认（没有修饰符），用于控制类、属性和方法的访问级别。
 - **getter和setter方法**：用于获取和设置对象属性。
@@ -101,12 +101,12 @@ public class Person {
     }
 }
 ```
-## 继承
+### 继承
 继承是面向对象编程的另一个基本原则，它允许子类继承父类的属性和方法，实现代码的复用。
-### 优点
+#### 优点
 - **代码复用**：子类可以继承父类的属性和方法，避免重复编写代码。
 - **扩展性**：子类可以在父类的基础上添加新的属性和方法。
-### 实现
+#### 实现
 在Java中，使用`extends`关键字实现继承。
 ```java
 public class Animal {
@@ -120,12 +120,12 @@ public class Dog extends Animal {
     }
 }
 ```
-## 多态
+### 多态
 多态是指同一个行为具有多个不同表现形式或形态的能力。在Java中，多态通常是指同一方法在不同类型的对象上表现出不同的行为。
-### 优点
+#### 优点
 - **可扩展性**：可以在不修改原有代码的基础上，增加新的功能。
 - **可替换性**：同一接口的不同实现可以相互替换。
-### 实现
+#### 实现
 在Java中，多态通常通过以下方式实现：
 - **方法重写**：子类重写父类的方法。
 - **对象造型**：父类引用指向子类对象。
@@ -543,7 +543,7 @@ JSTL提供了一系列自定义标记，用于简化JSP页面的开发。
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjkxMzE5MDYsLTE4Mjc2NjQ2ODEsLTEwNT
-Y3MTI3MjYsLTE3MjY4NTI1MjcsLTE0MTA3NDY3OTksMjEwNjk0
-Mjk2XX0=
+eyJoaXN0b3J5IjpbMjAzMjAwNjgyMywtMTgyNzY2NDY4MSwtMT
+A1NjcxMjcyNiwtMTcyNjg1MjUyNywtMTQxMDc0Njc5OSwyMTA2
+OTQyOTZdfQ==
 -->
