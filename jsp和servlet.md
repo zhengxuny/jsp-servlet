@@ -52,6 +52,7 @@ public class Servlet2 extends HttpServlet {
 ## 示例代码
 以下是一个使用`@WebServlet`注解的Servlet示例：
 ```java
+//@WebServlet(name = "s3", urlPatterns = {"/s3"})
 @WebServlet("/s3")
 public class Servlet3 extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -543,7 +544,7 @@ JSTL提供了一系列自定义标记，用于简化JSP页面的开发。
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjAzMjAwNjgyMywtMTgyNzY2NDY4MSwtMT
-A1NjcxMjcyNiwtMTcyNjg1MjUyNywtMTQxMDc0Njc5OSwyMTA2
-OTQyOTZdfQ==
+eyJoaXN0b3J5IjpbLTE2ODU2MjQ5MTksMjAzMjAwNjgyMywtMT
+gyNzY2NDY4MSwtMTA1NjcxMjcyNiwtMTcyNjg1MjUyNywtMTQx
+MDc0Njc5OSwyMTA2OTQyOTZdfQ==
 -->
