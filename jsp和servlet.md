@@ -221,7 +221,6 @@ String title = getServletContext().getInitParameter("title");
     <url-pattern>/ServletTest2</url-pattern>
 </servlet-mapping>
 ```
-通过上述Markdown排版的复习资料，可以清晰地了解Servlet的生命周期、参数获取、重定向以及`web.xml`的配置方法。在复习时，重点关注Servlet生命周期的三个阶段以及如何配置和使用初始化参数。
 
 
 
